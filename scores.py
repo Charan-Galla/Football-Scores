@@ -50,15 +50,16 @@ while(True):
     if (home_score != home_score_prev or away_score != away_score_prev):
         sendmessage("Goal update! {}\n{}".format(print_time, print_score))
     if(time == "HT"):
-        sendmessage("{}\nHalf-Time".format(print_score))
+        sendmessage("Half-Time\n{}".format(print_score))
         sleep(30)
         while(True):
+            Retrieve_Data(url)
             if (time != "HT"):
                 sendmessage("2nd half-kickoff\n{}".format(print_score))
                 break
             else:
                 sleep(30)
     if(time == "FT"):
-        sendmessage("{}\nFull-Time".format(print_score))
+        sendmessage("Full-Time\n{}".format(print_score))
         break
     sleep(30)
