@@ -16,13 +16,15 @@ def Retrieve_Data(url):
         html = source.read()
         source.close()
         soup = BeautifulSoup(html, "html.parser")
-        match_container = soup.find("div",{"class":"match-header"})
-        match_status = match_container.find("div",{"class":"score"})
-        home = match_container.find("div",{"class":"home"}).a.h2.text
-        away = match_container.find("div",{"class":"away"}).a.h2.text
-        home_score = match_status.div.text
-        time = match_status.find("div",{"class":"vs"}).text
-        away_score = match_status.find("div",{"class":"away-score"}).text
+        match_container = soup.find("div",{"class":"widget-match-header"})
+        match_status = match_container.find("div",{"class":"widget-match-header__info"})
+        teams = match_container.findAll("a",{"class":"widget-match-header__team"})
+        home = teams[0].div.span.text
+        away = teams[1].div.span.text
+        time = match_status.div.span.text
+        score = match_status.find("div",{"class":"widget-match-header__score"}).span.text
+        home_score = score.split(" ")[0]
+        away_score = score.split(" ")[2]
         print_score = "{} {}-{} {}".format(home, home_score, away_score, away)
         print_time = "Time : {}".format(time)
     except ValueError:
