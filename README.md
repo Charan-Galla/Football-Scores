@@ -1,8 +1,8 @@
 <h1>Live Football Scores</h1>
-<b>Language Used:</b> Python 3.5
-<b>Contributor:</b> Mahicharan Galla
+<p><b>Language Used:</b> Python 3.5</p>
+<p><b>Contributor:</b> Mahicharan Galla</p>
 <h2>Aim:</h2>
-<p>This is a python code which scrapes data from live Goal.com football match scores and updates the user for any event occuring in the game (Goals, Half-Time and Full-Time) with a notification. This script can be run on Linux (any distribution) and Windows 10.</p>
+<p>This is a python code which scrapes data from live Goal.com football match scores and updates the user for any event occuring in the game (Goals, Half-Time and Full-Time) with a notification. This script can be run on Linux (any distribution) and Windows 10 machines.</p>
 
 <h2>Working</h2>
 <p>Run scores.py on your machine.</p>
