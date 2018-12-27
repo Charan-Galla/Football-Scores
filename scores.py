@@ -3,17 +3,11 @@ from urllib.error import URLError
 from urllib.request import urlopen
 from sys import exit
 from time import sleep
-#from subprocess import Popen
-import notify2
-from win10toast import ToastNotifier
 import platform
     
 def sendmessage(message):
     if pf == 2:
-        notify2.init('app name')
-        n = notify2.Notification("Match Update!", message)
-        n.show()
-        #Popen(['notify-send', message])
+        Popen(['notify-send', message])
     else:
         toaster = ToastNotifier()
         toaster.show_toast("Match Update!",message)
@@ -41,13 +35,15 @@ def Retrieve_Data(url):
         print("**** Invalid url. Try again. Make sure the url has http:// ****")
         exit()
     except URLError:
-        print("Check your internet connection")
+        print("There is an error. Follow the below steps and run the code again:\n1. Check if the URL is correct\n2. Check your internet connection")
         exit()
 
 global pf
 if platform.system() == 'Windows' and platform.release() == '10':
+    from win10toast import ToastNotifier
     pf = 1
 elif platform.system() == 'Linux':
+    from subprocess import Popen
     pf = 2
 else:
     pf = 0
@@ -75,7 +71,7 @@ while(True):
         sendmessage("Goal update! {}\n{}".format(print_time, print_score))
     if(time == "HT"):
         sendmessage("Half-Time\n{}".format(print_score))
-        sleep(30)
+        sleep(600)
         while(True):
             Retrieve_Data(url)
             if (time != "HT"):
@@ -86,4 +82,3 @@ while(True):
     if(time == "FT"):
         sendmessage("Full-Time\n{}".format(print_score))
         break
-sleep(30)
