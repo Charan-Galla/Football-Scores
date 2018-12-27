@@ -3,10 +3,20 @@ from urllib.error import URLError
 from urllib.request import urlopen
 from sys import exit
 from time import sleep
-from subprocess import Popen
-
+#from subprocess import Popen
+import notify2
+from win10toast import ToastNotifier
+import platform
+    
 def sendmessage(message):
-    Popen(['notify-send', message])
+    if pf == 2:
+        notify2.init('app name')
+        n = notify2.Notification("Match Update!", message)
+        n.show()
+        #Popen(['notify-send', message])
+    else:
+        toaster = ToastNotifier()
+        toaster.show_toast("Match Update!",message)
     print(message)
 
 def Retrieve_Data(url):
@@ -33,6 +43,18 @@ def Retrieve_Data(url):
     except URLError:
         print("Check your internet connection")
         exit()
+
+global pf
+if platform.system() == 'Windows' and platform.release() == '10':
+    pf = 1
+elif platform.system() == 'Linux':
+    pf = 2
+else:
+    pf = 0
+
+if pf == 0:
+    print('No support yet for the given OS')
+    exit()
 
 url = input('Enter the Goal.com live match url here:  ')
 Retrieve_Data(url)
@@ -64,4 +86,4 @@ while(True):
     if(time == "FT"):
         sendmessage("Full-Time\n{}".format(print_score))
         break
-    sleep(30)
+sleep(30)
